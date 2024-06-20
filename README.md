@@ -1,6 +1,5 @@
 - 👋 Hi, I’m @SteeGauna
 - 👀 I’m interested in collaborating with programmers better than me.
-- 🌱 I’m currently learning "C" in CS50
 - 📫 steven.gauna96@gmail.com
 
 <!---
