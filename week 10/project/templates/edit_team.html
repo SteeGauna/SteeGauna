@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit team
+{% endblock %}
+
+{% block main %}
+
+                <!-- Table to display the team for user to edit -->
+    <div id="edit_table">
+        <h1 class="pad">Edit team</h1>
+
+        {% if message %}
+            <div id="message1" class="alert alert-primary" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        <button onclick="view_form()" class="btn-primary pad">Add Player</button>
+        <span style="margin-left:10px;">
+            <button onclick="view_roles()" class="btn-primary">Set Team Roles</button>
+        </span>
+
+        <table class="table table-success table-striped table-hover">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Weight(kg)</td>
+                    <td>Age</td>
+                    <td>Height(M)</td>
+                    <td>Ethnicity</td>
+                    <td>Medical</td>
+                    <td>Position</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in team %}
+                    <tr id="{{ player.id }}">
+                        <td><a class="tlink" href="/profile/{{ player.id }}">{{ player.name }}</a></td>
+                        <td>{{ player.weight }}</td>
+                        <td>{{ player.age }}</td>
+                        <td>{{ player.height }}</td>
+                        <td>{{ player.ethnicity }}</td>
+                        <td>{{ player.medical }}</td>
+                        <td>{{ player.position }}</td>
+                        <td><button onclick="delete_player('{{ player.name }}','{{ player.id }}')" class="btn-primary">Delete Player</button></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+                    <!-- Form to add a player to the team -->
+    <div class="addplayer" id="add_player">
+        <h1>Add Player</h1>
+
+        <form id="addform">
+            <div class="iptadd">
+                <input autocomplete="off" class="addbox" type="text" id="name" placeholder="Full Name">
+                <input autocomplete="off" class="addbox" type="text" id="weight" placeholder="Weight">
+                <input autocomplete="off" class="addbox" type="text" id="age" placeholder="Age">
+                <input autocomplete="off" class="addbox" type="text" id="height" placeholder="Height">
+                <input autocomplete="off" class="addbox" type="text" id="ethnicity" placeholder="Ethnicity">
+                <input autocomplete="off" class="addbox" type="text" id="medical" placeholder="Medical History">
+                <input autocomplete="off" class="addbox" type="text" id="position" placeholder="Position">
+                <button onclick="add_player()" class="btn btn-primary add">Add</button>
+            </div>
+        </form>
+
+    </div>
+
+                    <!-- Setting the roles of the team -->
+    <div id="set_roles">
+        <h1 class="pad">Set Roles</h1>
+
+        <div class="profile">
+            <div class="playerinfo">
+                <h6 class="pad">C = Captain</h6>
+                <h6 class="pad">VC = Vice Captain</h6>
+                <h6 class="pad">GK = Goal Kicker</h6>
+                <h6 class="pad">PK = Place Kicker</h6>
+            </div>
+            <div class="playerinfo">
+                <h6 data-name="c" class="pad"><b>Captain:</b> {{ cap }}</h6>
+                <h6 data-name="vc" class="pad"><b>Vice Captain:</b> {{ vice }}</h6>
+                <h6 data-name="gk" class="pad"><b>Goal Kicker:</b> {{ goalk }}</h6>
+                <h6 data-name="pk" class="pad"><b>Place Kicker:</b> {{ placek }}</h6>
+                <button class="btn-primary" onclick="confirm_roles()">Confirm Roles</button>
+            </div>
+        </div>
+
+        <table class="table table-success table-striped table-hover">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Weight(kg)</td>
+                    <td>Age</td>
+                    <td>Height(M)</td>
+                    <td>Ethnicity</td>
+                    <td>Medical</td>
+                    <td>Position</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in team %}
+                    <tr id="{{ player.id }}">
+                        <td><a class="tlink" href="/profile/{{ player.name }}">{{ player.name }}</a></td>
+                        <td>{{ player.weight }}</td>
+                        <td>{{ player.age }}</td>
+                        <td>{{ player.height }}</td>
+                        <td>{{ player.ethnicity }}</td>
+                        <td>{{ player.medical }}</td>
+                        <td>{{ player.position }}</td>
+                        <td>
+                            <button class="press" onclick="set_role('{{ player.id }}', 'c')">C</button>
+                            <button class="press" onclick="set_role('{{ player.id }}', 'vc')">VC</button>
+                            <button class="press" onclick="set_role('{{ player.id }}', 'gk')">GK</button>
+                            <button class="press" onclick="set_role('{{ player.id }}', 'pk')">PK</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+                    <!-- div to act as variable -->
+    <div id="storage">
+        <div></div>
+    </div>
+{% endblock %}

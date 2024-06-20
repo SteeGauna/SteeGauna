@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Team List
+{% endblock %}
+
+{% block main %}
+    <div style="display:flex; justify-content:space-between;">
+        <h1 class="pad">Team List</h1>
+        <h4 class="pad" style="margin-top:20px; margin-right:5px;">{{ name }}</h4>
+    </div>
+                <!-- Table to display all the players -->
+    <table class="table table-success table-striped table-hover">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Weight(kg)</td>
+                <td>Age</td>
+                <td>Height(M)</td>
+                <td>Ethnicity</td>
+                <td>Medical</td>
+                <td>Position</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in team %}
+                <tr>
+                    <td><a class="tlink" href="/profile/{{ player.id }}">{{ player.name }}</a></td>
+                    <td>{{ player.weight }}</td>
+                    <td>{{ player.age }}</td>
+                    <td>{{ player.height }}</td>
+                    <td>{{ player.ethnicity }}</td>
+                    <td>{{ player.medical }}</td>
+                    <td>{{ player.position }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
