@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Playing 23
+{% endblock %}
+
+{% block main %}
+    <h1 class="pad">Game Team</h1>
+
+                            <!-- div to display whole team for user to select -->
+    <div id="select_gteam">
+
+        {% if message %}
+            <div id="message1" class="alert alert-secondary" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+
+                            <!-- Only if the user has already a 23 -->
+        {% if gteam %}
+            <div class="pad">
+                <button class="btn-primary" onclick="view_23()">View current team</button>
+            </div>
+        {% endif %}
+
+        <table class="table table-success table-striped table-hover">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Weight(kg)</td>
+                    <td>Age</td>
+                    <td>Height(M)</td>
+                    <td>Ethnicity</td>
+                    <td>Medical</td>
+                    <td>Position</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in team %}
+                    <tr>
+                        <td><a class="tlink" href="/profile/{{ player.id }}">{{ player.name }}</a></td>
+                        <td>{{ player.weight }}</td>
+                        <td>{{ player.age }}</td>
+                        <td>{{ player.height }}</td>
+                        <td>{{ player.ethnicity }}</td>
+                        <td>{{ player.medical }}</td>
+                        <td>{{ player.position }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div style="margin-top:30px; text-align:right; margin-bottom:10px; margin-right:40px;" >
+            <button onclick="select_gteam()" class="btn-primary">Select Team</button>
+        </div>
+    </div>
+
+
+                            <!-- div for selecting the 23 and confirming -->
+    <div id="confirm_gteam">
+
+        <div id="message2" class="alert alert-secondary" role="alert">
+            {{ message }}
+        </div>
+
+        <table class="table table-success table-striped table-hover">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>Name</td>
+                    <td>Weight(kg)</td>
+                    <td>Age</td>
+                    <td>Height(M)</td>
+                    <td>Ethnicity</td>
+                    <td>Medical</td>
+                    <td>Position</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in team %}
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="{{ player.id }}" onclick="player_selected('{{ player.id }}')" value="{{ player.id }}">
+                        </td>
+                        <td><a class="tlink" href="/profile/{{ player.id }}">{{ player.name }}</a></td>
+                        <td>{{ player.weight }}</td>
+                        <td>{{ player.age }}</td>
+                        <td>{{ player.height }}</td>
+                        <td>{{ player.ethnicity }}</td>
+                        <td>{{ player.medical }}</td>
+                        <td>{{ player.position }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div style="margin-top:30px; text-align:right; margin-bottom:10px; margin-right:40px;" >
+            <button onclick="confirm_gteam()" class="btn-primary">Confirm Team</button>
+        </div>
+    </div>
+
+                    <!-- Table to view current 23 -->
+    <div id="view_23">
+        <div class="pad">
+            <button class="btn-primary" onclick="hide_views()">View Extended Squad</button>
+        </div>
+
+        <table class="table table-success table-striped table-hover">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Weight(kg)</td>
+                    <td>Age</td>
+                    <td>Height(M)</td>
+                    <td>Ethnicity</td>
+                    <td>Medical</td>
+                    <td>Position</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in gameteam %}
+                    <tr>
+                        <td>{{ player.name }}</td>
+                        <td>{{ player.weight }}</td>
+                        <td>{{ player.age }}</td>
+                        <td>{{ player.height }}</td>
+                        <td>{{ player.ethnicity }}</td>
+                        <td>{{ player.medical }}</td>
+                        <td>{{ player.position }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+                        <!-- div store selected players  -->
+    <div id="selected_players">
+        <div></div>
+    </div>
+
+{% endblock %}
